@@ -149,29 +149,30 @@ if (strlen($PLEXPY_API)) {
 			header: {
 				left: 'prev,next today',
 				center: 'title',
-				right: 'listDay,listWeek,month'
+				right: 'month,agendaWeek,agendaDay,listWeek'
 			},
 
-			views: {
-				listDay: { buttonText: 'list day' },
-				listWeek: { buttonText: 'list week' }
-			},
-			
+			// views: {
+			// 	listDay: { buttonText: 'list day' },
+			// 	listWeek: { buttonText: 'list week' }
+			// },
+
 			weekNumbers: 'true',
 			googleCalendarApiKey: '<?=$GOOGLE_CALENDAR_API_KEY?>',
 			navLinks: true,
-			eventColor: '#E5A00C',
 			contentHeight: 'auto',
 			timeFormat: 'H(:mm)', //Change to hh:mm for 12 hour clock
 
 			events: {
 				googleCalendarId: '<?=$GOOGLE_CALENDAR_ID?>'
 			},
+
 			eventRender: function(event, element) { //Show small tooltip with information
 				start=moment(event.start).format('H:mm');
 				end=moment(event.end).format('H:mm');
-				$(element).tooltip({title: start + " - " + end + "<br>" + event.title, html: true});             
+				$(element).tooltip({title: start + " - " + end + "<br>" + event.title, html: true});
 			},
+
 			eventClick: function(event) { //Make events not clickable, remove this function if you want to be able to click events.
 				if (event.url) {
 					return false;
@@ -184,7 +185,7 @@ if (strlen($PLEXPY_API)) {
 
 <title>
 	<?=ucfirst($SERVER_NAME)?>
-</title>    	
+</title>
 
 <!-- Bootstrap core CSS -->
 <!-- <link href="assets/css/bootstrap.css" rel="stylesheet"> -->
@@ -221,7 +222,7 @@ if (strlen($PLEXPY_API)) {
 				<!-- Modal content-->
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<button type="button" class="close" data-dismiss="modal"></button>
 						<h4 class="modal-title">TV Show Calendar</h4>
 					</div>
 					<div id="calendar" class="modal-body">
@@ -230,7 +231,6 @@ if (strlen($PLEXPY_API)) {
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					</div>
 				</div>
-
 			</div>
 		</div>
 
@@ -241,8 +241,6 @@ if (strlen($PLEXPY_API)) {
 			});
 
 		</script>
-
-
 
 	</div><!--/.nav-collapse -->
 </div>
@@ -272,12 +270,12 @@ if (strlen($PLEXPY_API)) {
 					<img src="assets/img/slack.svg" width="180" alt="">
 					<h4>Slack Team</h4>
 					<p>Alerts, Requests, and General Chat. Join the Plex Slack Team today!</p>
-				</a>	
-				<?php } elseif ($SLACK_DESATURATE == True) { ?>	
+				</a>
+				<?php } elseif ($SLACK_DESATURATE == True) { ?>
 				<img src="assets/img/Slack.svg" width="180" class="desaturate" alt="">
 				<h4>Slack Team, coming soon!</h4>
 				<?php } ?>
-			</div> 
+			</div>
 		</div><!-- /row -->
 	</div><!-- /container -->
 
@@ -289,7 +287,7 @@ if (strlen($PLEXPY_API)) {
 		</div>
 	</div>
 
-	<div class="container" id="link-bar">		
+	<div class="container" id="link-bar">
 		<div class="row mt centered">
 
 			<div class="col-lg-4">

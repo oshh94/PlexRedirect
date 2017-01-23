@@ -52,8 +52,7 @@ $PLEXPY_API = '';
 $MOVIE_LIBS = 'Movies';
 // Comma-separated list of section names to count as TV Shows
 $TV_LIBS = 'TV Shows';
-
-// TV SHOW CALENDAR 
+// TV SHOW CALENDAR
 // For more info see https://fullcalendar.io/docs/google_calendar/
 $GOOGLE_CALENDAR_API_KEY = '';
 
