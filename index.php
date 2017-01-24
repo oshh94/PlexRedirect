@@ -210,7 +210,7 @@ if (strlen($PLEXPY_API)) {
 			<div class="navbar-header"></div>
 			<a class="navbar-brand"><b>Plex</b></a>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#" data-toggle="modal" data-target="#calendarModal">TV Show Calendar</a></li>
+				<li><a data-toggle="modal" data-target="#calendarModal">TV Show Calendar</a></li>
 			</div>
 		</div>
 		<!-- /row -->
