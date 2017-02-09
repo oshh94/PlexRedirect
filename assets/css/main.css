@@ -154,3 +154,19 @@ h3.italic {
 }
 
 .modal .modal-dialog { width: 80%; }
+
+.fc-ltr .fc-basic-view .fc-day-top .fc-day-number {
+    float: right;
+    color: black;
+}
+
+.fc-basic-view td.fc-week-number > * {
+    display: inline-block;
+    min-width: 1.25em;
+    color: black;
+}
+
+.fc-ltr .fc-list-heading-main {
+    float: left;
+    color: black;
+}
