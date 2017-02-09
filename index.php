@@ -161,6 +161,7 @@ if (strlen($PLEXPY_API)) {
 			googleCalendarApiKey: '<?=$GOOGLE_CALENDAR_API_KEY?>',
 			navLinks: true,
 			contentHeight: 'auto',
+			eventColor: '#E5A00C',
 			timeFormat: 'H(:mm)', //Change to hh:mm for 12 hour clock
 
 			events: {
@@ -188,12 +189,8 @@ if (strlen($PLEXPY_API)) {
 </title>
 
 <!-- Bootstrap core CSS -->
-<!-- <link href="assets/css/bootstrap.css" rel="stylesheet"> -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
 
 <!-- Custom styles -->
 <link href="assets/css/main.css" rel="stylesheet">
