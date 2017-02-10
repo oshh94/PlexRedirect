@@ -207,7 +207,7 @@ if (strlen($PLEXPY_API)) {
 			<div class="navbar-header"></div>
 			<a class="navbar-brand"><b>Plex</b></a>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a data-toggle="modal" data-target="#calendarModal">TV Show Calendar</a></li>
+				<li><a data-toggle="modal" data-target="#calendarModal" class="btn btn-link"><span class="glyphicon glyphicon-calendar"></span> TV Show Calendar</a></li>
 			</div>
 		</div>
 		<!-- /row -->
@@ -236,7 +236,6 @@ if (strlen($PLEXPY_API)) {
 			$('#calendarModal').on('shown.bs.modal', function () {
 				$("#calendar").fullCalendar('render');
 			});
-
 		</script>
 
 	</div><!--/.nav-collapse -->
