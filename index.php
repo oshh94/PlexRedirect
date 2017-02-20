@@ -47,102 +47,102 @@ if (strlen($PLEXPY_API)) {
 	<!-- Fullcalander -->
 
 <!-- Loading these now as we will need some of them in the coming scripts -->
-	<link rel='stylesheet' href='assets/css/fullcalendar.min.css' />
-	<script src='assets/lib/jquery.min.js'></script>
-	<script src='assets/lib/moment.min.js'></script>
-	<script src='assets/js/fullcalendar.min.js'></script>
-	<script type='text/javascript' src='assets/js/gcal.min.js'></script>
+<link rel='stylesheet' href='assets/css/fullcalendar.min.css' />
+<script src='assets/lib/jquery.min.js'></script>
+<script src='assets/lib/moment.min.js'></script>
+<script src='assets/js/fullcalendar.min.js'></script>
+<script type='text/javascript' src='assets/js/gcal.min.js'></script>
 
-	<link rel="shortcut icon" type="image/x-icon" href="plexlanding.ico" />`
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<style>
-		body.offline #link-bar {
-			display:none;
+<link rel="shortcut icon" type="image/x-icon" href="plexlanding.ico" />`
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<style>
+body.offline #link-bar {
+	display:none;
+}
+
+body.online  #link-bar{
+	display:block;
+}
+</style>
+<script src="assets/js/ping.js"></script>
+<script type='text/javascript'>
+
+HTMLElement.prototype.hasClass = function (className) {
+	if (this.classList) {
+		return this.classList.contains(className);
+	} else {
+		return (-1 < this.className.indexOf(className));
+	}
+};
+
+HTMLElement.prototype.addClass = function (className) {
+	if (this.classList) {
+		this.classList.add(className);
+	} else if (!this.hasClass(className)) {
+		var classes = this.className.split(" ");
+		classes.push(className);
+		this.className = classes.join(" ");
+	}
+	return this;
+};
+
+HTMLElement.prototype.removeClass = function (className) {
+	if (this.classList) {
+		this.classList.remove(className);
+	} else {
+		var classes = this.className.split(" ");
+		classes.splice(classes.indexOf(className), 1);
+		this.className = classes.join(" ");
+	}
+	return this;
+};
+
+function checkServer() {
+	var p = new Ping();
+	var server = "$PLEX_SERVER";
+	var timeout = 2000; //Milliseconds
+	var body = document.getElementsByTagName("body")[0];
+	var serverMsg = document.getElementById("server-status-msg");
+	var serverImg = document.getElementById("server-status-img");
+	var stream_count = <?=isset($STREAM_COUNT)?$STREAM_COUNT:'null'?>;
+
+
+	function serverUp() {
+		serverImg.src = "assets/img/up.svg";
+		body.addClass('online').removeClass("offline");
+
+		if (stream_count == null) {
+			serverMsg.innerHTML = 'Ready for streaming';
+		} else {
+			serverMsg.innerHTML = 'Currently streaming to <strong>'+
+			stream_count + '</strong> user' + (stream_count == 1 ? '' : 's');
 		}
+	}
 
-		body.online  #link-bar{
-			display:block;
-		}
-	</style>
-	<script src="assets/js/ping.js"></script>
-	<script type='text/javascript'>
+	function serverDown() {
+		serverMsg.innerHTML = 'Down and unreachable';
+		serverImg.src = "assets/img/down.svg";
+	}
 
-		HTMLElement.prototype.hasClass = function (className) {
-			if (this.classList) {
-				return this.classList.contains(className);
+	if (stream_count == null) {
+		p.ping(server, function(data) {
+			if (data < 1000) {
+				serverUp(stream_count);
 			} else {
-				return (-1 < this.className.indexOf(className));
+				serverDown();
 			}
-		};
-
-		HTMLElement.prototype.addClass = function (className) {
-			if (this.classList) {
-				this.classList.add(className);
-			} else if (!this.hasClass(className)) {
-				var classes = this.className.split(" ");
-				classes.push(className);
-				this.className = classes.join(" ");
-			}
-			return this;
-		};
-
-		HTMLElement.prototype.removeClass = function (className) {
-			if (this.classList) {
-				this.classList.remove(className);
-			} else {
-				var classes = this.className.split(" ");
-				classes.splice(classes.indexOf(className), 1);
-				this.className = classes.join(" ");
-			}
-			return this;
-		};
-
-		function checkServer() {
-			var p = new Ping();
-			var server = "$PLEX_SERVER";
-      		var timeout = 2000; //Milliseconds
-      		var body = document.getElementsByTagName("body")[0];
-      		var serverMsg = document.getElementById("server-status-msg");
-      		var serverImg = document.getElementById("server-status-img");
-      		var stream_count = <?=isset($STREAM_COUNT)?$STREAM_COUNT:'null'?>;
+		}, timeout);
+	} else {
+		serverUp(stream_count);
+	}
+}
 
 
-      		function serverUp() {
-      			serverImg.src = "assets/img/up.svg";
-      			body.addClass('online').removeClass("offline");
-
-      			if (stream_count == null) {
-      				serverMsg.innerHTML = 'Ready for streaming';
-      			} else {
-      				serverMsg.innerHTML = 'Currently streaming to <strong>'+
-      				stream_count + '</strong> user' + (stream_count == 1 ? '' : 's');
-      			}
-      		}
-
-      		function serverDown() {
-      			serverMsg.innerHTML = 'Down and unreachable';
-      			serverImg.src = "assets/img/down.svg";
-      		}
-
-      		if (stream_count == null) {
-      			p.ping(server, function(data) {
-      				if (data < 1000) {
-      					serverUp(stream_count);
-      				} else {
-      					serverDown();
-      				}
-      			}, timeout);
-      		} else {
-      			serverUp(stream_count);
-      		}
-      	}
-
-
-  <?php if (strlen($GOOGLE_CALENDAR_ID) && (strlen($GOOGLE_CALENDAR_API_KEY))> 0) { ?>
+<?php if (strlen($GOOGLE_CALENDAR_ID) && (strlen($GOOGLE_CALENDAR_API_KEY))> 0) { ?>
 	// Fullcalendar.io
 	$(document).ready(function() {
 		$('#calendar').fullCalendar({
@@ -151,11 +151,6 @@ if (strlen($PLEXPY_API)) {
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay,listWeek'
 			},
-
-			// views: {
-			// 	listDay: { buttonText: 'list day' },
-			// 	listWeek: { buttonText: 'list week' }
-			// },
 
 			weekNumbers: 'true',
 			googleCalendarApiKey: '<?=$GOOGLE_CALENDAR_API_KEY?>',
@@ -181,11 +176,12 @@ if (strlen($PLEXPY_API)) {
 			}
 		});
 	});
-	<?php } ?>
+<?php } ?>
+
 </script>
 
 <title>
-	<?=ucfirst($SERVER_NAME)?>
+<?=ucfirst($SERVER_NAME)?>
 </title>
 
 <!-- Bootstrap core CSS -->
@@ -219,7 +215,7 @@ if (strlen($PLEXPY_API)) {
 				<!-- Modal content-->
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"></button>
+						<button type="button" class="close" data-dismiss="modal">X</button>
 						<h4 class="modal-title">TV Show Calendar</h4>
 					</div>
 					<div id="calendar" class="modal-body">
