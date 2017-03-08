@@ -3,7 +3,7 @@
 # PlexRedirect
 a Plex landing page that redirects you to various sites.
 ![alt tag](http://i.imgur.com/pilOWJH.png)
-![alt tag](http://i.imgur.com/rmFjRyC.png)
+![alt tag](http://i.imgur.com/D3hwI5y.png)
 
 ## Features:
 * Link to [Plex.tv](plex.tv)
@@ -27,6 +27,11 @@ I have used some of [@gruppler](https://github.com/gruppler)'s PHP code in his v
 ## Installing:
 Add this to your webserver root folder. You can rename it to your server name if you would like. Access it via your IP address. PHP is needed to run.
 
+**Calendar**
+
+Fullcalendar.io can pull from Sonarr or any Google calendar. To setup Sonarr, you must first synchronise it with a Google Calendar. In order to do this you need to port forward Sonarr's port. Remember to enable password. Press get iCal button in Sonarr. Make sure it's your public ip address, if not edit it. Make a new Calendar on Google using the iCal link. Don't use a downloaded .ics file as this will not be able to pull new schedules etc. Then follow fullcalendar's guide on making the fullcalendar connection to your Google Calendar, [here.](https://fullcalendar.io/docs/google_calendar/)
+
+Stop when you have the calendar API key and Calendar ID, copy and paste this into config.php
 
 ## How I installed it:
 The way I have it set up is forwarded my domain with masking to my public IP address and port. 
