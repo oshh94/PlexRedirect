@@ -1,4 +1,4 @@
-**Forked from [PlexRedirect] (https://github.com/ITRav4/PlexRedirect)**
+**Forked from [PlexRedirect](https://github.com/ITRav4/PlexRedirect)**
 
 # PlexRedirect
 a Plex landing page that redirects you to various sites.
